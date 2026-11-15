@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walta HerdShield - Forecast</title>
+  <link rel="icon" href="assets/walta-herdshield-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/brand-system.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body data-page="forecast">
+  <div class="container">
+    <header class="header">
+      <a class="logo" href="index.html" aria-label="Walta HerdShield home">
+        <img src="assets/walta-herdshield-lockup-light.svg" alt="Walta HerdShield" />
+      </a>
+      <div class="menu-lang" style="display: flex; align-items: center; gap: 15px;">
+        <!-- Language Switcher -->
+        <select id="languageSwitcher" style="">
+          <option value="en">English</option>
+          <option value="am">አማርኛ</option>
+          <option value="om">Oromiffa</option>
+        </select>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a class="sidebar-brand" href="index.html">
+        <img src="assets/walta-herdshield-icon.svg" alt="" />
+        <span>WALTA HERDSHIELD</span>
+      </a>
+      <nav class="nav">
+        <p class="nav-section">OVERVIEW</p>
+        <a href="index.html" class="nav-link"><i class="fas fa-th"></i> <span data-i18n="dashboard">Dashboard</span></a>
+        <p class="nav-section">CLIMATE INTELLIGENCE</p>
+        <a href="forecast.html" class="nav-link active"><i class="fas fa-forward"></i> <span data-i18n="forecast">Multi-Horizon Forecast</span></a>
+        <a href="xai.html" class="nav-link"><i class="fas fa-magnifying-glass-chart"></i> <span data-i18n="xai">Explainable AI</span></a>
+        <p class="nav-section">LIVESTOCK DECISIONS</p>
+        <a href="policy.html" class="nav-link"><i class="fas fa-gavel"></i> <span data-i18n="adaptive_policy">Adaptive Policy</span></a>
+        <a href="destock.html" class="nav-link"><i class="fas fa-cow"></i> <span data-i18n="destock_nav">Destocking Advisor</span></a>
+      </nav>
+      <div class="status">
+        <p><i class="fas fa-sync-alt"></i> <span data-i18n="last_update">Last update:</span> <span id="updateTime">Aug 15, 2025</span></p>
+        <p><span class="sensor-dot"></span> <span data-i18n="system_online">System Online</span></p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section id="forecast" class="section">
+        <div class="card">
+          <h2 class="card-title" data-i18n="forecast_title">Historical rainfall assessment</h2>
+          <p class="subtitle" data-i18n="forecast_subtitle">Compare observed rainfall over the selected 90-day period with the same calendar period in up to ten prior years.</p>
+
+          <form id="forecastForm" class="form-grid">
+            <div class="form-group">
+              <label class="form-label" data-i18n="region_label">Region</label>
+              <select id="region" class="form-input">
+                <option value="Afar" data-i18n="region_afar">Afar</option>
+                <option value="Somali" data-i18n="region_somali">Somali</option>
+                <option value="Mekele" data-i18n="region_mekele">Mekele</option>
+                <option value="Borena" data-i18n="region_borena">Borena</option>
+                <option value="Gambela" data-i18n="region_gambela">Gambela</option>
+                <option value="Gonder" data-i18n="region_gonder">Gonder</option>
+                <option value="Wag-Himra" data-i18n="region_waghimra">Wag-Himra</option>
+                <option value="Yabello" data-i18n="region_yabello">Yabello</option>
+                <option value="Oromia">Oromia</option>
+                <option value="Amhara">Amhara</option>
+                <option value="SNNPR">SNNPR</option>
+                <option value="Tigray">Tigray</option>
+                <option value="Dire Dawa">Dire Dawa</option>
+                <option value="Harari">Harari</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="assessmentDate" data-i18n="assessment_date">Assessment Date</label>
+              <input type="date" id="assessmentDate" class="form-input" required />
+            </div>
+            <button id="runBtn" class="btn btn-primary" type="submit">
+              <i class="fas fa-cloud-rain"></i> <span data-i18n="run_ensemble">Compare with historical observations</span>
+            </button>
+          </form>
+
+          <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p data-i18n="loading_text">Loading observed rainfall and historical reference periods...</p>
+          </div>
+
+          <div id="results" class="results">
+            <h3 class="card-title" data-i18n="results_title">Historical comparison</h3>
+            <p id="assessmentCaveat" class="subtitle"></p>
+            <div id="resultRows" class="result-container"></div>
+            <div class="chart-container">
+              <canvas id="trendChart"></canvas>
+            </div>
+          </div>
+          <div id="assessmentError" class="error-message" role="alert" style="display: none;"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p data-i18n="footer">© 2025 Walta HerdShield | Livestock intelligence for resilient communities</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/ai-engine.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

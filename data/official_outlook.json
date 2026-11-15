@@ -1,0 +1,18 @@
+{
+  "source": "ICPAC - 74th Greater Horn of Africa Climate Outlook Forum (GHACOF74), Kigali, 17-18 Aug 2026",
+  "season": "October-December 2026",
+  "region": "Southern Ethiopia (with central/southern Somalia and north-eastern Kenya)",
+  "issued": "2026-08-18",
+  "summary": "Wetter-than-normal rainfall is forecast. ICPAC reports about a 90% chance of enhanced rainfall over southern Ethiopia, linked to a strengthening El Nino and a developing positive Indian Ocean Dipole.",
+  "risks": "A very wet season can bring flash floods and runoff. This forecast covers the Oct-Dec season as a whole, and the rains normally end in December.",
+  "url": "https://www.icpac.net/documents/1118/GHACOF74_Final_Technical_Statement.pdf",
+  "verified_by_human": false,
+  "note": "Entered from public ICPAC material. Confirm against the original statement and the Ethiopian Meteorological Institute before relying on it.",
+  "season_am": "ጥቅምት–ታህሳስ 2026",
+  "season_om": "Onkoloolessa–Muddee 2026",
+  "summary_am": "ከመደበኛ በላይ እርጥብ የሆነ ዝናብ ይጠበቃል። ICPAC በደቡብ ኢትዮጵያ ከመደበኛ በላይ ዝናብ የመኖሩ ዕድል ወደ 90% መሆኑን ይገልጻል፤ ይህም እየጠነከረ ከመጣው ኤል ኒኖ እና እየተፈጠረ ካለው አዎንታዊ የህንድ ውቅያኖስ ዲፖል ጋር የተያያዘ ነው።",
+  "summary_om": "Rooba idaa ol ta'e eeggama. ICPAC Itoophiyaa kibbaatti roobni idaa ol ta'u carraan isaa dhibbeentaa 90 ta'uu ibsa; kunis El Niño cimaa dhufaa jiruu fi Indian Ocean Dipole gaarii (positive) uumamaa jiruu waliin walqabata.",
+  "risks_am": "በጣም ዝናባማ ወቅት ድንገተኛ ጎርፍ እና የውሃ ፍሰት ሊያስከትል ይችላል። ይህ ትንበያ የጥቅምት–ታህሳስ ወቅትን በጥቅሉ የሚመለከት ሲሆን ዝናቡ በተለምዶ በታህሳስ ያበቃል።",
+  "risks_om": "Waagni baay'ee jallisu lolaa fi karaa bishaan yaa'uu hamaa fiduu danda'a. Tilmaamni kun waggaa Onkoloolessa–Muddee guutuu ilaala; roobni yeroo baay'ee Muddee keessatti xumurama.",
+  "translation_note": "Amharic and Afaan Oromoo text is a machine-written DRAFT. Have a native speaker review it before launch."
+}

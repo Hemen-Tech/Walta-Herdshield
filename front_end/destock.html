@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walta HerdShield - Destocking Advisor</title>
+  <link rel="icon" href="assets/walta-herdshield-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/destock.css" />
+  <link rel="stylesheet" href="css/brand-system.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body data-page="destock">
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Walta HerdShield home">
+      <img class="brand-lockup" src="assets/walta-herdshield-lockup-light.svg" alt="Walta HerdShield" />
+    </a>
+    <div class="top-actions">
+      <select id="languageSwitcher" aria-label="Language">
+        <option value="en">English</option>
+        <option value="am">አማርኛ</option>
+        <option value="om">Oromiffa</option>
+      </select>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <a class="sidebar-brand" href="index.html">
+        <img src="assets/walta-herdshield-icon.svg" alt="" />
+        <span>WALTA HERDSHIELD</span>
+      </a>
+      <nav class="nav">
+        <p class="nav-section">OVERVIEW</p>
+        <a href="index.html" class="nav-link"><i class="fas fa-th"></i> <span data-i18n="dashboard">Dashboard</span></a>
+        <p class="nav-section">CLIMATE INTELLIGENCE</p>
+        <a href="forecast.html" class="nav-link"><i class="fas fa-cloud-rain"></i> <span data-i18n="forecast">Rainfall assessment</span></a>
+        <a href="xai.html" class="nav-link"><i class="fas fa-magnifying-glass-chart"></i> <span data-i18n="xai">Climate evidence</span></a>
+        <p class="nav-section">LIVESTOCK DECISIONS</p>
+        <a href="policy.html" class="nav-link"><i class="fas fa-scale-balanced"></i> <span data-i18n="adaptive_policy">Adaptive Policy</span></a>
+        <a href="destock.html" class="nav-link active"><i class="fas fa-cow"></i> <span data-i18n="destock_nav">Destocking Advisor</span></a>
+      </nav>
+      <div class="status">
+        <p><i class="fas fa-database"></i> <span data-i18n="data_until">Prices until:</span> <strong id="dataUntil">--</strong></p>
+        <p><span class="dot"></span> <span data-i18n="system_online">System Online</span></p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="card hero">
+        <h1 data-i18n="destock_title">Destocking Advisor: sell or hold?</h1>
+        <p class="lead" data-i18n="destock_intro">Uses real livestock market prices (NMIS) and the drought outlook to suggest when to sell cattle during drought.</p>
+
+        <div id="noModelBanner" class="banner" style="display:none;" data-i18n="no_model_banner">Drought forecast is not connected yet.</div>
+
+        <div id="climateCard" class="banner" style="display:none;"></div>
+
+        <div class="form-grid">
+          <label class="field"><span data-i18n="market_label">Market</span>
+            <select id="market"></select></label>
+          <label class="field"><span data-i18n="grade_label">Animal condition</span>
+            <select id="grade">
+              <option value="Thin" data-i18n="grade_thin">Thin</option>
+              <option value="Moderate Weight" selected data-i18n="grade_mod">Medium</option>
+              <option value="Very Fat" data-i18n="grade_fat">Fat</option>
+            </select></label>
+          <label class="field"><span data-i18n="herd_label">Number of animals</span>
+            <input id="herd" type="number" min="1" max="100000" value="20" /></label>
+          <label class="field"><span data-i18n="drought_label">Drought outlook (next 3 months)</span>
+            <select id="severity">
+              <option value="auto" data-i18n="sev_auto">From forecast model</option>
+              <option value="0" data-i18n="sev_0">Scenario: no drought</option>
+              <option value="1" data-i18n="sev_1">Scenario: mild drought</option>
+              <option value="2" data-i18n="sev_2">Scenario: moderate drought</option>
+              <option value="3" data-i18n="sev_3">Scenario: severe drought</option>
+            </select></label>
+        </div>
+        <button id="runBtn" class="btn"><i class="fas fa-scale-balanced"></i> <span data-i18n="get_advice">Get advice</span></button>
+      </section>
+
+      <div id="errorBox" class="banner error" style="display:none;"></div>
+
+      <section id="resultCard" class="card" style="display:none;">
+        <div id="actionBadge" class="action"></div>
+        <div class="stats">
+          <div class="stat"><b id="priceNow">--</b><span data-i18n="price_now">Price per animal today (Birr)</span></div>
+          <div class="stat"><b id="herdValue">--</b><span data-i18n="herd_value">Value of your herd today (Birr)</span></div>
+          <div class="stat"><b id="waitRatio">--</b><span data-i18n="wait_ratio">Waiting vs selling today</span></div>
+          <div class="stat"><b id="confidence">--</b><span data-i18n="confidence">Confidence</span></div>
+        </div>
+        <div class="conf-parts" id="confParts"></div>
+        <h2 class="card-title" data-i18n="why">Why this advice</h2>
+        <ul class="reasons" id="reasons"></ul>
+        <h2 class="card-title" data-i18n="scenario_title">Advice in each drought scenario</h2>
+        <p class="fine" data-i18n="scenario_note">Use this when the forecast is missing or uncertain.</p>
+        <table class="scen"><tbody id="scenBody"></tbody></table>
+        <p class="fine" data-i18n="advice_disclaimer">This is a decision aid, not an order.</p>
+      </section>
+
+      <div class="charts">
+        <section class="card">
+          <h2 class="card-title" data-i18n="price_history">Price history at this market (Birr)</h2>
+          <div class="chart-box"><canvas id="priceChart"></canvas></div>
+        </section>
+        <section class="card">
+          <h2 class="card-title" data-i18n="arrivals">Reported quantity per record (meaning not confirmed)</h2>
+          <div class="chart-box"><canvas id="arrivalChart"></canvas></div>
+        </section>
+      </div>
+
+      <section class="card" id="evidenceCard">
+        <h2 class="card-title" data-i18n="ev_title">Where the numbers behind the advice come from</h2>
+        <p class="fine" data-i18n="ev_intro">Every number the advice depends on is listed with how well it is supported.</p>
+        <div id="evidenceList"></div>
+        <p class="fine" id="evCandidates"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title" data-i18n="note_title">About the data</h2>
+        <p class="fine" id="dataNote"></p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <span data-i18n="footer">© 2025 Walta HerdShield | Livestock intelligence for resilient communities</span></footer>
+
+  <script src="js/destock.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

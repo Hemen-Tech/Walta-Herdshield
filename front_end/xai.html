@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walta HerdShield - Climate Evidence</title>
+  <link rel="icon" href="assets/walta-herdshield-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/brand-system.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body data-page="xai">
+  <header class="header">
+    <a class="logo" href="index.html" aria-label="Walta HerdShield home">
+      <img src="assets/walta-herdshield-lockup-light.svg" alt="Walta HerdShield" />
+    </a>
+    <div class="menu-lang" style="display: flex; align-items: center; gap: 15px;">
+      <select id="languageSwitcher" aria-label="Language">
+        <option value="en">English</option>
+        <option value="am">አማርኛ</option>
+        <option value="om">Oromiffa</option>
+      </select>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="index.html">
+      <img src="assets/walta-herdshield-icon.svg" alt="" />
+      <span>WALTA HERDSHIELD</span>
+    </a>
+    <nav class="nav">
+      <p class="nav-section">OVERVIEW</p>
+      <a href="index.html" class="nav-link"><i class="fas fa-th"></i> <span data-i18n="dashboard">Dashboard</span></a>
+      <p class="nav-section">CLIMATE INTELLIGENCE</p>
+      <a href="forecast.html" class="nav-link"><i class="fas fa-forward"></i> <span data-i18n="forecast">Rainfall assessment</span></a>
+      <a href="xai.html" class="nav-link active"><i class="fas fa-magnifying-glass-chart"></i> <span data-i18n="xai">Climate evidence</span></a>
+      <p class="nav-section">LIVESTOCK DECISIONS</p>
+      <a href="policy.html" class="nav-link"><i class="fas fa-gavel"></i> <span data-i18n="adaptive_policy">Adaptive Policy</span></a>
+      <a href="destock.html" class="nav-link"><i class="fas fa-cow"></i> <span data-i18n="destock_nav">Destocking Advisor</span></a>
+    </nav>
+    <div class="status">
+      <p><i class="fas fa-database"></i> <span data-i18n="observed_data_only">Observed data only</span></p>
+    </div>
+  </aside>
+  <main class="main-content">
+    <section class="section">
+      <div class="card">
+        <h2 class="card-title" data-i18n="evidence_title">Climate evidence explorer</h2>
+        <p class="subtitle" data-i18n="evidence_intro">Review the latest available observed climate indicators for a selected Ethiopian location. Values are sourced from ERA5-Land reanalysis.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="evidenceRegion" data-i18n="region_label">Region</label>
+            <select id="evidenceRegion" class="form-input">
+              <option value="Afar">Afar</option>
+              <option value="Somali">Somali</option>
+              <option value="Mekele">Mekele</option>
+              <option value="Borena">Borena</option>
+              <option value="Gambela">Gambela</option>
+              <option value="Gonder">Gonder</option>
+              <option value="Wag-Himra">Wag-Himra</option>
+              <option value="Yabello">Yabello</option>
+              <option value="Oromia">Oromia</option>
+              <option value="Amhara">Amhara</option>
+              <option value="SNNPR">SNNPR</option>
+              <option value="Tigray">Tigray</option>
+              <option value="Dire Dawa">Dire Dawa</option>
+              <option value="Harari">Harari</option>
+            </select>
+          </div>
+        </div>
+        <button id="loadEvidence" class="btn btn-primary" type="button" data-i18n="load_observations">Load observations</button>
+        <div id="evidenceLoading" class="loading" role="status" data-i18n="data_loading">Loading observed climate data...</div>
+        <div id="evidenceError" class="error-message" role="alert" style="display: none;"></div>
+        <div id="evidenceResults" style="display: none;">
+          <h3 id="evidenceLocation" class="card-title"></h3>
+          <p id="evidencePeriod" class="subtitle"></p>
+          <div class="stats-grid">
+            <div class="card stat-card">
+              <p class="stat-value stat-blue" id="evidenceRain"></p>
+              <p class="stat-label" data-i18n="observed_rainfall">Observed rainfall (90 days)</p>
+            </div>
+            <div class="card stat-card">
+              <p class="stat-value stat-orange" id="evidenceTemperature"></p>
+              <p class="stat-label" data-i18n="mean_temperature">Mean temperature (90 days)</p>
+            </div>
+            <div class="card stat-card">
+              <p class="stat-value stat-green" id="evidenceEt0"></p>
+              <p class="stat-label" data-i18n="reference_evapotranspiration">Reference evapotranspiration (90 days)</p>
+            </div>
+          </div>
+          <p id="evidenceAttribution" class="chart-subtitle"></p>
+          <p class="subtitle" data-i18n="evidence_limitations">These are gridded reanalysis estimates, not local station measurements. No machine-learning forecast is generated here.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><p data-i18n="footer">© 2025 Walta HerdShield | Livestock intelligence for resilient communities</p></footer>
+  <script src="js/main.js"></script>
+  <script src="js/explainer.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

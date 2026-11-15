@@ -1,0 +1,21 @@
+{
+ "updated": "2026-11-05",
+ "source": "admas-model",
+ "regions": {
+  "Oromia": {
+   "No Drought": 0.3,
+   "Mild": 0.3,
+   "Moderate": 0.25,
+   "Severe": 0.15
+  },
+  "Somali": {
+   "label": "Moderate"
+  },
+  "Afar": {
+   "No Drought": 0.2,
+   "Mild": 0.3,
+   "Moderate": 0.3,
+   "Severe": 0.2
+  }
+ }
+}

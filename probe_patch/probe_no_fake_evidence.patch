@@ -1,0 +1,59 @@
+diff -ruN a/src/lib/server/apiApp.ts b/src/lib/server/apiApp.ts
+--- a/src/lib/server/apiApp.ts	2026-11-05 23:11:17.473194752 +0000
++++ b/src/lib/server/apiApp.ts	2026-11-05 23:11:17.506522259 +0000
+@@ -579,19 +579,20 @@
+       return res.json(result);
+     } catch (err: any) {
+       console.info('[API /api/research/assumption] Returning fallback academic research on error.');
+-      return res.status(200).json({
+-        status: 'ok',
++      // An error is not evidence. Do not report "no conflicting literature" when the search actually failed.
++      return res.status(502).json({
++        status: 'error',
+         assumptionId: parseResult.data.assumptionId || 'A1',
+         totalFound: 0,
+         papers: [],
+         consensus: {
+-          stance: 'CONTEXT',
++          stance: 'INCONCLUSIVE',
+           supportingCount: 0,
+           challengingCount: 0,
+           contextCount: 0,
+           inconclusiveCount: 0,
+-          confidence: 0.7,
+-          summary: 'Academic sweeps completed. No conflicting literature identified.'
++          confidence: 0,
++          summary: 'Academic search failed. No conclusion can be drawn.'
+         }
+       });
+     }
+diff -ruN a/src/lib/server/integrations/scholarxiv.ts b/src/lib/server/integrations/scholarxiv.ts
+--- a/src/lib/server/integrations/scholarxiv.ts	2026-11-05 23:11:17.472234997 +0000
++++ b/src/lib/server/integrations/scholarxiv.ts	2026-11-05 23:11:17.506331946 +0000
+@@ -171,8 +171,12 @@
+       }
+     }
+ 
+-    // Resilient fallback: Return domain-grounded empirical corpus
+-    return this.getDeterministicEmpiricalCorpus(query, limit);
++    // No live results. The built-in "empirical corpus" is FABRICATED demo data (invented papers and statistics),
++    // so it is only used when PROBE_ALLOW_DEMO_CORPUS=1 is set explicitly. Otherwise report "no results".
++    if (process.env.PROBE_ALLOW_DEMO_CORPUS === '1') {
++      return this.getDeterministicEmpiricalCorpus(query, limit);
++    }
++    return [];
+   }
+ 
+   private normalizeScholarXIVPapers(rawItems: any[]): ScholarXIVRawPaper[] {
+@@ -233,7 +237,10 @@
+     try {
+       papers = await this.searchPapers(academicQuery, limit);
+     } catch {
+-      papers = this.getDeterministicEmpiricalCorpus(academicQuery, limit);
++      // Same rule as above: never silently substitute the fabricated demo corpus for real search results.
++      papers = process.env.PROBE_ALLOW_DEMO_CORPUS === '1'
++        ? this.getDeterministicEmpiricalCorpus(academicQuery, limit)
++        : [];
+     }
+ 
+     if (!papers || papers.length === 0) {

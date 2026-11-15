@@ -1,0 +1,91 @@
+{
+ "_README": "Best-guess placement of each NMIS market. PLEASE VERIFY. 'region' is what the drought model reports (Afar / Somali / Oromia). 'area' is used to group the dashboard list. Borana-area markets are the ones shown on the phone menu.",
+ "Nagelle Borana": {
+  "region": "Oromia",
+  "area": "Borana area"
+ },
+ "Yabalo": {
+  "region": "Oromia",
+  "area": "Borana area"
+ },
+ "Arero": {
+  "region": "Oromia",
+  "area": "Borana area"
+ },
+ "Moyale Oromiya": {
+  "region": "Oromia",
+  "area": "Borana area"
+ },
+ "Miyo": {
+  "region": "Oromia",
+  "area": "Borana area"
+ },
+ "Babile Oromiya": {
+  "region": "Oromia",
+  "area": "Other Oromia"
+ },
+ "Gursum Oromiya": {
+  "region": "Oromia",
+  "area": "Other Oromia"
+ },
+ "Me'Aso": {
+  "region": "Oromia",
+  "area": "Other Oromia"
+ },
+ "Mi'essoo": {
+  "region": "Oromia",
+  "area": "Other Oromia"
+ },
+ "Goro Dola": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Qebribeyah": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Gursum Somali": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Awebera": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Hudet": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Degehabur": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Dembel": {
+  "region": "Somali",
+  "area": "Somali"
+ },
+ "Dubti": {
+  "region": "Afar",
+  "area": "Afar"
+ },
+ "Aysaita": {
+  "region": "Afar",
+  "area": "Afar"
+ },
+ "Amibara": {
+  "region": "Afar",
+  "area": "Afar"
+ },
+ "Chifera": {
+  "region": "Afar",
+  "area": "Afar"
+ },
+ "Yallo": {
+  "region": "Afar",
+  "area": "Afar"
+ },
+ "Barbare": {
+  "region": "Unknown",
+  "area": "Other / unknown"
+ }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 64" role="img" aria-labelledby="title">
+  <title id="title">Walta HerdShield</title>
+  <path d="M9 5h16l7 10 7-10h16l-5 31-18 17-18-17L9 5Z" fill="#244B3C"/>
+  <path d="m22 20 10 11 10-11M32 31v9" fill="none" stroke="#F3F0E8" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2.6"/>
+  <circle cx="32" cy="31" r="2.1" fill="#8B9B83"/>
+  <text x="76" y="31" fill="#244B3C" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" font-weight="650" letter-spacing="1.15">WALTA HERDSHIELD</text>
+  <path d="M77 42h24" stroke="#8B9B83" stroke-width="2"/>
+  <text x="110" y="46" fill="#68736D" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="9" font-weight="550" letter-spacing="1.6">LIVESTOCK INTELLIGENCE</text>
+</svg>

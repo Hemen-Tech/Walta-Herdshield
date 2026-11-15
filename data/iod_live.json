@@ -1,0 +1,17 @@
+{
+  "source": "Australian Bureau of Meteorology (BoM), Southern hemisphere monitoring",
+  "url": "https://www.bom.gov.au/climate/enso/",
+  "week_ending": "2026-10-25",
+  "value": 0.69,
+  "threshold": 0.4,
+  "weeks_above_threshold": 7,
+  "bom_statement": "A positive Indian Ocean Dipole event is underway; positive values are forecast to continue.",
+  "outlook": {
+    "source": "Columbia CCSR/IRI IOD forecast issued October 2026",
+    "text": "Positive conditions are expected to persist through December 2026, possibly peaking in November, and return to neutral during January-April 2027."
+  },
+  "entered": "2026-11-07",
+  "entered_by": "Assistant, copied from the BoM page found by web search. No person has checked it yet.",
+  "verified_by_human": false,
+  "how_to_refresh": "Open the BoM page above every week or two, then change week_ending, value and weeks_above_threshold. Readings older than 21 days are flagged as stale."
+}

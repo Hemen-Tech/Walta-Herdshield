@@ -1,0 +1,49 @@
+{
+  "updated": "2026-11-07",
+  "source": "borana-spi-v1",
+  "skill": "climatology_only",
+  "markets": {
+    "Miyo": {
+      "No Drought": 0.64,
+      "Mild": 0.139,
+      "Moderate": 0.132,
+      "Severe": 0.089
+    },
+    "Yabalo": {
+      "No Drought": 0.64,
+      "Mild": 0.139,
+      "Moderate": 0.132,
+      "Severe": 0.089
+    },
+    "Nagelle Borana": {
+      "No Drought": 0.64,
+      "Mild": 0.139,
+      "Moderate": 0.132,
+      "Severe": 0.089
+    },
+    "Arero": {
+      "No Drought": 0.64,
+      "Mild": 0.139,
+      "Moderate": 0.132,
+      "Severe": 0.089
+    },
+    "Moyale Oromiya": {
+      "No Drought": 0.64,
+      "Mild": 0.139,
+      "Moderate": 0.132,
+      "Severe": 0.089
+    }
+  },
+  "model_card": {
+    "method": "climatology only (model did not beat it)",
+    "data": "ERA5 rainfall via Open-Meteo, 6 Borana points, 1981-2026-10-31; ONI + DMI",
+    "classes": "SPI of next 3 months: No Drought >= -0.5; Mild -1.0..-0.5; Moderate -1.5..-1.0; Severe < -1.5",
+    "split": "train 1981-2012, check 2013-2018, test 2019-2025 (time-based)",
+    "brier_skill_vs_climatology": {
+      "check 2013-2018": -0.047,
+      "test 2019-2025": 0.038
+    },
+    "forecast_origin": "2026-10",
+    "limits": "rainfall only (not forage/soil moisture/deaths); modest skill expected; reanalysis not gauge data"
+  }
+}

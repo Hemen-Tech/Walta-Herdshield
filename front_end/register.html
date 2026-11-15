@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Register for region-aware Walta HerdShield livestock intelligence updates." />
+  <title>Register | Walta HerdShield</title>
+  <link rel="icon" href="assets/walta-herdshield-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/brand-system.css" />
+  <link rel="stylesheet" href="css/registration.css" />
+</head>
+<body class="registration-page">
+  <header class="registration-header">
+    <a href="/" aria-label="Walta HerdShield dashboard">
+      <img src="assets/walta-herdshield-lockup-light.svg" alt="Walta HerdShield" />
+    </a>
+    <a class="registration-back" href="/">Back to dashboard</a>
+  </header>
+
+  <main class="registration-main">
+    <section class="registration-intro">
+      <p class="registration-eyebrow">REGIONAL LIVESTOCK INTELLIGENCE</p>
+      <h1>Register for HerdShield</h1>
+      <p>
+        Choose your stakeholder profile and area to receive relevant information
+        through the existing SMS service. Regional coverage depends on available data.
+      </p>
+    </section>
+
+    <section class="registration-panel" aria-labelledby="registrationTitle">
+      <div class="registration-panel-heading">
+        <div>
+          <p class="registration-eyebrow">YOUR PROFILE</p>
+          <h2 id="registrationTitle">Registration details</h2>
+        </div>
+        <span class="registration-step">01 / PROFILE</span>
+      </div>
+
+      <form id="registrationForm" novalidate>
+        <div class="registration-fields">
+          <div class="registration-field registration-field-wide">
+            <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+            <input id="fullName" name="full_name" type="text" autocomplete="name" maxlength="100" required />
+          </div>
+          <div class="registration-field">
+            <label for="phone">Ethiopian mobile number <span aria-hidden="true">*</span></label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+251 9XX XXX XXX" maxlength="24" required />
+            <small>Enter +251 followed by your mobile number, or a local 09… number.</small>
+          </div>
+          <div class="registration-field">
+            <label for="category">Stakeholder category <span aria-hidden="true">*</span></label>
+            <select id="category" name="category" required>
+              <option value="">Loading categories…</option>
+            </select>
+          </div>
+          <div class="registration-field">
+            <label for="region">Region / administrative area <span aria-hidden="true">*</span></label>
+            <select id="region" name="region" required>
+              <option value="">Loading regions…</option>
+            </select>
+            <small>Climate intelligence is not available for every administrative area.</small>
+          </div>
+          <div class="registration-field">
+            <label for="area">Zone or district <span class="optional-label">Optional</span></label>
+            <input id="area" name="area" type="text" maxlength="100" autocomplete="address-level2" />
+            <small>Enter the area name; boundary-level data coverage is not guaranteed.</small>
+          </div>
+        </div>
+
+        <fieldset class="billing-fieldset">
+          <legend>Subscription billing period <span aria-hidden="true">*</span></legend>
+          <p class="billing-description">Select a plan. Payment is not collected here; registration remains pending payment.</p>
+          <div class="billing-options" id="billingOptions">
+            <label class="billing-option" data-period="monthly">
+              <input type="radio" name="billing_period" value="monthly" required checked />
+              <span class="billing-option-label">Monthly</span>
+              <strong id="monthlyPrice">— ETB</strong>
+              <span class="billing-option-note">per month</span>
+            </label>
+            <label class="billing-option" data-period="yearly">
+              <input type="radio" name="billing_period" value="yearly" required />
+              <span class="billing-option-label">Yearly</span>
+              <strong id="yearlyPrice">— ETB</strong>
+              <span class="billing-option-note">per year</span>
+            </label>
+          </div>
+          <p class="selected-plan" id="selectedPlan" aria-live="polite">Choose a stakeholder category to view its price.</p>
+        </fieldset>
+
+        <label class="consent-row" for="smsConsent">
+          <input id="smsConsent" name="sms_consent" type="checkbox" required />
+          <span>I agree to receive the registration welcome message and relevant SMS updates. I understand I can opt out by replying STOP.</span>
+        </label>
+
+        <p class="registration-privacy">
+          Your registration is stored by the HerdShield backend. We use your phone number
+          for opted-in SMS communications and do not display registration records publicly.
+        </p>
+        <div id="registrationMessage" class="registration-message" role="status" aria-live="polite" hidden></div>
+        <button id="submitRegistration" class="registration-submit" type="submit" disabled>
+          Submit registration
+        </button>
+      </form>
+
+      <section id="registrationSuccess" class="registration-success" aria-live="polite" hidden>
+        <p class="registration-eyebrow">REGISTRATION RECEIVED</p>
+        <h2>Thank you for registering.</h2>
+        <p class="registration-explanation">
+          Your registration details have been saved. Your selected stakeholder category
+          and region will guide the type and location of relevant HerdShield information
+          available to you. Review your plan and registration details below.
+        </p>
+        <dl id="registrationSummary"></dl>
+        <p id="smsResult"></p>
+        <p class="payment-pending">Subscription status: pending payment. No payment has been taken or confirmed.</p>
+        <button id="editRegistration" class="registration-back-button" type="button">Return to form</button>
+      </section>
+    </section>
+    <p class="registration-footnote">Walta HerdShield · climate and livestock decision support for resilient communities</p>
+  </main>
+  <script src="js/registration.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+ "_README": "The first four words of probe_text become Probe's search query, so put the key terms first.",
+ "claims": [
+  {
+   "key": "mortality",
+   "probe_text": "Borana cattle drought mortality pastoral herd losses"
+  },
+  {
+   "key": "thinning",
+   "probe_text": "cattle body condition drought weight loss pastoral"
+  },
+  {
+   "key": "holding_cost",
+   "probe_text": "pastoral livestock drought feed water costs destocking"
+  },
+  {
+   "key": "crash_effect",
+   "probe_text": "livestock prices drought market oversupply Ethiopia pastoralists"
+  },
+  {
+   "key": "price_drift",
+   "probe_text": "Ethiopia livestock price seasonality pastoral markets"
+  }
+ ]
+}

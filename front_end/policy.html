@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walta HerdShield - Adaptive Policy</title>
+  <link rel="icon" href="assets/walta-herdshield-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/brand-system.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body data-page="policy">
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <a class="logo" href="index.html" aria-label="Walta HerdShield home">
+        <img src="assets/walta-herdshield-lockup-light.svg" alt="Walta HerdShield" />
+      </a>
+      <div class="menu-lang" style="display: flex; align-items: center; gap: 15px;">
+        <select id="languageSwitcher">
+          <option value="en">English</option>
+          <option value="am">አማርኛ</option>
+          <option value="om">Oromiffa</option>
+        </select>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <a class="sidebar-brand" href="index.html">
+        <img src="assets/walta-herdshield-icon.svg" alt="" />
+        <span>WALTA HERDSHIELD</span>
+      </a>
+      <nav class="nav">
+        <p class="nav-section">OVERVIEW</p>
+        <a href="index.html" class="nav-link"><i class="fas fa-th"></i> <span data-i18n="dashboard">Dashboard</span></a>
+        <p class="nav-section">CLIMATE INTELLIGENCE</p>
+        <a href="forecast.html" class="nav-link"><i class="fas fa-forward"></i> <span data-i18n="forecast">Multi-Horizon Forecast</span></a>
+        <a href="xai.html" class="nav-link"><i class="fas fa-magnifying-glass-chart"></i> <span data-i18n="xai">Explainable AI</span></a>
+        <p class="nav-section">LIVESTOCK DECISIONS</p>
+        <a href="policy.html" class="nav-link active"><i class="fas fa-gavel"></i> <span data-i18n="adaptive_policy">Adaptive Policy</span></a>
+        <a href="destock.html" class="nav-link"><i class="fas fa-cow"></i> <span data-i18n="destock_nav">Destocking Advisor</span></a>
+      </nav>
+      <div class="status">
+        <p><i class="fas fa-sync-alt"></i> <span data-i18n="last_update">Last update:</span> <span id="updateTime">Aug 31, 2025</span></p>
+        <p><span class="sensor-dot"></span> <span data-i18n="system_online">System Online</span></p>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section id="policy" class="section">
+        <div class="card">
+          <h2 class="card-title" data-i18n="adaptive_policy_engine">Data-derived policy reference</h2>
+          <p class="subtitle" data-i18n="policy_intro">
+            These recommendations are generated from the latest observed rainfall anomaly for the selected region and should still be validated by local experts before implementation.
+          </p>
+
+          <div class="form-grid" style="margin-bottom: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="policyRegion">Region</label>
+              <select id="policyRegion" class="form-input">
+                <option value="Afar">Afar</option>
+                <option value="Somali">Somali</option>
+                <option value="Mekele">Mekele</option>
+                <option value="Borena">Borena</option>
+                <option value="Gambela">Gambela</option>
+                <option value="Gonder">Gonder</option>
+                <option value="Wag-Himra">Wag-Himra</option>
+                <option value="Yabello">Yabello</option>
+                <option value="Oromia">Oromia</option>
+                <option value="Amhara">Amhara</option>
+                <option value="SNNPR">SNNPR</option>
+                <option value="Tigray">Tigray</option>
+                <option value="Dire Dawa">Dire Dawa</option>
+                <option value="Harari">Harari</option>
+              </select>
+            </div>
+            <button id="refreshPolicy" class="btn btn-primary" type="button">Refresh recommendations</button>
+          </div>
+
+          <div id="policySummary" class="result-row" style="margin-bottom: 1rem; font-weight: 600;"></div>
+          <ul id="policyRecommendationList" class="list"></ul>
+
+          <h3 class="card-title" data-i18n="governance_rules">Governance & Rules</h3>
+          <ul class="list">
+            <li data-i18n="rule_1">Policies must adapt dynamically as new rainfall and risk signals are updated.</li>
+            <li data-i18n="rule_2">Short-horizon actions take priority when the rainfall anomaly is severe or high.</li>
+            <li data-i18n="rule_3">All recommendations are screening-level guidance and require expert review before operational action.</li>
+            <li data-i18n="rule_4">Water allocation and food support should align with current rainfall stress and local readiness.</li>
+          </ul>
+
+          <p id="policyCaveat" class="subtitle" data-i18n="policy_sources">
+            Loading data-derived policy guidance...
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p data-i18n="footer">© 2025 Walta HerdShield | Livestock intelligence for resilient communities</p>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

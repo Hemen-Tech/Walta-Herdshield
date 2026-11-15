@@ -1,0 +1,65 @@
+{
+  "_README": "Every number here is an ASSUMPTION, not measured from the NMIS file. Death rates are now ROUGHLY anchored to published Borana drought herd losses (about 30-60% of cattle lost over a severe drought episode of ~12 months, i.e. ~3-6% per month on average across the herd; thin animals die first). Weight/condition -> price effect comes from the NMIS thin/medium/fat price gap. Replace with local figures when you have them.",
+  "horizon_months": 3,
+  "severity_names": [
+    "No Drought",
+    "Mild",
+    "Moderate",
+    "Severe"
+  ],
+  "monthly_mortality_by_severity": {
+    "Thin": [
+      0.004,
+      0.01,
+      0.035,
+      0.08
+    ],
+    "Moderate Weight": [
+      0.0015,
+      0.004,
+      0.015,
+      0.04
+    ],
+    "Very Fat": [
+      0.0006,
+      0.0015,
+      0.006,
+      0.02
+    ]
+  },
+  "monthly_chance_animal_gets_thinner_by_severity": [
+    0.03,
+    0.12,
+    0.28,
+    0.45
+  ],
+  "monthly_chance_animal_gets_fatter_by_severity": [
+    0.1,
+    0.03,
+    0.0,
+    0.0
+  ],
+  "monthly_extra_selling_pressure_by_severity": [
+    0.0,
+    0.05,
+    0.12,
+    0.2
+  ],
+  "price_drop_per_full_unit_of_extra_pressure": 0.35,
+  "monthly_holding_cost_fraction_of_price_by_severity": [
+    0.003,
+    0.008,
+    0.02,
+    0.035
+  ],
+  "decision_thresholds_hold_value_divided_by_sell_now_value": {
+    "hold_if_at_least": 0.99,
+    "sell_25_if_at_least": 0.94,
+    "sell_50_if_at_least": 0.85
+  },
+  "_threshold_meaning": "Read as 'expected loss from waiting': under 1% = effectively no reason to sell (monthly price noise in the data is ~13%, so smaller differences mean nothing); 1-6% -> sell 25%; 6-15% -> sell 50%; more than 15% -> sell 75%. These are policy choices to agree with herders and experts, not measured values.",
+  "use_estimated_price_drift": false,
+  "_drift_note": "A rolling backtest showed the estimated monthly price drift did NOT beat a simple 'no change' forecast, so drift is set to 0 by default. See reports/PRICE_BACKTEST.md.",
+  "apply_crash_effect_in_headline": false,
+  "_crash_note": "The market-crash strength (price_drop_per_full_unit_of_extra_pressure) has no local evidence. It is OFF in the headline advice; the API shows what the advice would be if it were real. Set to true only after calibrating it."
+}

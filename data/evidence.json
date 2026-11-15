@@ -1,0 +1,155 @@
+{
+ "updated": "2026-11-05",
+ "how_to_read": "Sources marked checked_by_human=false were found by Claude through web search and only the search snippet was read. Open each link and confirm before citing.",
+ "sources": {
+  "ceeol": {
+   "title": "Borana pastoralists: cattle losses in the 2016-2017 drought (household survey, 529 households)",
+   "url": "https://ceeol.com/search/article-detail?id=1050949",
+   "type": "peer-reviewed article (per search snippet)",
+   "says": "About 55% of cattle lost in the 2016-2017 drought.",
+   "checked_by_human": false
+  },
+  "fao_loss": {
+   "title": "FAO/ILCA: Borana herd losses in the 1980s drought",
+   "url": "https://www.fao.org/4/x5553e/x5553e07.htm",
+   "type": "FAO report",
+   "says": "Net herd loss about 60% (42% deaths, 14% sales, 4% slaughter).",
+   "checked_by_human": false
+  },
+  "fao_price": {
+   "title": "FAO/ILCA: livestock terms of trade in the 1980s Borana drought",
+   "url": "https://www.fao.org/4/x5461e/x5461e0s.htm",
+   "type": "FAO report",
+   "says": "Live cattle price fell about 70% (1.00 to 0.30 Birr per kg) during the drought.",
+   "checked_by_human": false
+  },
+  "springer_cs": {
+   "title": "Condition score and live weight in Boran cattle",
+   "url": "https://link.springer.com/article/10.1007/BF02297329",
+   "type": "journal article (per search snippet)",
+   "says": "One point on the 9-point condition scale is about 24 kg in Boran cows.",
+   "checked_by_human": false
+  },
+  "mdpi_spi": {
+   "title": "Effects of drought on livestock production, market dynamics and pastoralists' adaptation (Borana; MDPI Climate 2025)",
+   "url": "https://mdpi.com/2225-1154/13/4/65",
+   "type": "journal article (per search snippet)",
+   "says": "Links the drought index (SPI) to livestock market prices. Best published match for calibrating the crash effect; read it for the actual numbers.",
+   "checked_by_human": false
+  },
+  "yeda": {
+   "title": "Tikvah Ethiopia news, 22 Nehase 2018 E.C.: Yeda district (North Gondar, Amhara) drought",
+   "url": "",
+   "type": "news report",
+   "says": "District office says about 15,000 animals died in roughly 50 days from 1 Hamle 2018. Herd size and species are not given, so no rate can be computed; different region and farming system.",
+   "checked_by_human": false
+  }
+ },
+ "items": [
+  {
+   "key": "grade_price_gap",
+   "status": "measured",
+   "sensitivity_pct": null,
+   "label": {
+    "en": "Price gap between thin, medium and fat animals",
+    "om": "Garaagarummaa gatii loon dadhabaa, giddu galeessaa fi furdaa",
+    "am": "በከሲታ፣ መካከለኛ እና ወፍራም እንስሳት መካከል የዋጋ ልዩነት"
+   },
+   "note": "Measured from the NMIS prices (median gap between grades at the same market and month).",
+   "sources": []
+  },
+  {
+   "key": "mortality",
+   "status": "partly",
+   "sensitivity_pct": 8,
+   "label": {
+    "en": "Animal deaths per month during drought",
+    "om": "Du'a loonii ji'a tokkoon yeroo hongee",
+    "am": "በድርቅ ወቅት በወር የእንስሳት ሞት"
+   },
+   "note": "Published herd losses over whole droughts (roughly 30-60%) were converted to monthly rates by us. The split between thin and fat animals is NOT supported by these sources.",
+   "sources": [
+    "ceeol",
+    "fao_loss",
+    "yeda"
+   ]
+  },
+  {
+   "key": "thinning",
+   "status": "assumed",
+   "sensitivity_pct": 4,
+   "label": {
+    "en": "Chance an animal gets thinner each month",
+    "om": "Carraa loon ji'a tokkoon dadhabuu",
+    "am": "አንድ እንስሳ በየወሩ የመክሳት እድል"
+   },
+   "note": "The condition-score source shows weight loss matters in value, but not how fast animals lose condition. The rates are assumed.",
+   "sources": [
+    "springer_cs"
+   ]
+  },
+  {
+   "key": "crash_effect",
+   "status": "assumed",
+   "sensitivity_pct": 25,
+   "label": {
+    "en": "Price crash when many people sell at once",
+    "om": "Gatii gadi bu'uu yeroo namoonni baay'een walitti gurguran",
+    "am": "ብዙ ሰዎች በአንድ ጊዜ ሲሸጡ የዋጋ መውደቅ"
+   },
+   "note": "History shows prices can collapse in a drought, but the size of the effect for today's markets is not calibrated. The advice depends on this assumption MORE than any other: replace it first.",
+   "sources": [
+    "fao_price",
+    "mdpi_spi"
+   ]
+  },
+  {
+   "key": "holding_cost",
+   "status": "assumed",
+   "sensitivity_pct": 4,
+   "label": {
+    "en": "Extra cost of waiting (feed, water, labour)",
+    "om": "Baasii dabalataa eeggachuu (nyaata, bishaan, humna)",
+    "am": "መጠበቅ የሚያስከፍለው ተጨማሪ ወጪ (መኖ፣ ውሃ፣ ጉልበት)"
+   },
+   "note": "No source yet. Ask herders and the Borana zone livestock office.",
+   "sources": []
+  },
+  {
+   "key": "price_drift",
+   "status": "tested",
+   "sensitivity_pct": 12,
+   "label": {
+    "en": "Normal monthly price trend",
+    "om": "Adeemsa gatii ji'a ji'aan idilee",
+    "am": "መደበኛ ወርሃዊ የዋጋ አዝማሚያ"
+   },
+   "note": "A time-based backtest on the NMIS data showed no gain over a 'no change' forecast, so the trend is set to 0 (reports/PRICE_BACKTEST.md).",
+   "sources": []
+  },
+  {
+   "key": "thresholds",
+   "status": "policy",
+   "sensitivity_pct": null,
+   "label": {
+    "en": "When to sell 25%, 50% or 75%",
+    "om": "Yoom %25, %50 ykn %75 gurguruu",
+    "am": "መቼ 25%፣ 50% ወይም 75% መሸጥ"
+   },
+   "note": "A policy choice (expected loss from waiting under 1% means hold). Agree it with herders and experts; it is not a measured value.",
+   "sources": []
+  },
+  {
+   "key": "drought_outlook",
+   "status": "limit",
+   "sensitivity_pct": null,
+   "label": {
+    "en": "Drought forecast",
+    "om": "Tilmaama hongee",
+    "am": "የድርቅ ትንበያ"
+   },
+   "note": "The Borana SPI notebook was run on 2026-11-07 using ERA5 rainfall for six Borana points plus ONI and DMI. Its logistic model did not beat historical climatology on the 2013-2018 validation period (Brier skill -0.047), so the current dated outlook uses historical-average probabilities only, not a skillful drought prediction. The advisor uses it for five listed Borana markets and correctly reports LOW drought confidence. Other markets have no town-level forecast. Rainfall alone does not measure forage, soil moisture, or animal outcomes.",
+   "sources": []
+  }
+ ]
+}

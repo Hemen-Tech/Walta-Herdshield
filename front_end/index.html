@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walta HerdShield | Livestock Intelligence</title>
+  <link rel="icon" href="assets/walta-herdshield-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/brand-system.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    /* Chart styles */
+    .card canvas {
+        max-height: 190px;
+        width: 100%;
+    }
+  </style>
+</head>
+<body data-page="index">
+    <header class="header">
+      <a class="logo" href="index.html" aria-label="Walta HerdShield home">
+        <img src="assets/walta-herdshield-lockup-light.svg" alt="Walta HerdShield" />
+      </a>
+      <div class="menu-lang" style="display: flex; align-items: center; gap: 15px;">
+        <!-- Language Switcher -->
+        <select id="languageSwitcher" style="">
+          <option value="en">English</option>
+          <option value="am">አማርኛ</option>
+          <option value="om">Oromiffa</option>
+        </select>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a class="sidebar-brand" href="index.html">
+        <img src="assets/walta-herdshield-icon.svg" alt="" />
+        <span>WALTA HERDSHIELD</span>
+      </a>
+      <nav class="nav">
+        <p class="nav-section">OVERVIEW</p>
+        <a href="index.html" class="nav-link active"><i class="fas fa-th"></i> <span data-i18n="dashboard">Dashboard</span></a>
+        <a href="register.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Register for updates</span></a>
+        <p class="nav-section">CLIMATE INTELLIGENCE</p>
+        <a href="forecast.html" class="nav-link"><i class="fas fa-forward"></i> <span data-i18n="forecast">Multi-Horizon Forecast</span></a>
+        <a href="xai.html" class="nav-link"><i class="fas fa-magnifying-glass-chart"></i> <span data-i18n="xai">Explainable AI</span></a>
+        <p class="nav-section">LIVESTOCK DECISIONS</p>
+        <a href="policy.html" class="nav-link"><i class="fas fa-gavel"></i> <span data-i18n="adaptive_policy">Adaptive Policy</span></a>
+        <a href="destock.html" class="nav-link"><i class="fas fa-cow"></i> <span data-i18n="destock_nav">Destocking Advisor</span></a>
+      </nav>
+      <div class="status">
+        <p><i class="fas fa-sync-alt"></i> <span data-i18n="last_update">Last update:</span> <span id="updateTime">08-26-2025</span></p>
+        <p><span class="sensor-dot"></span> <span data-i18n="system_online">System Online</span></p>
+      </div>
+    </aside>
+
+    <main class="main-content dashboard-main">
+      <section class="hero dashboard-hero">
+        <div class="hero-copy">
+          <p class="hero-kicker"><span class="kicker-rule"></span> INTEGRATED LIVESTOCK INTELLIGENCE</p>
+          <h1 class="hero-title" data-i18n="hero_title">WALTA HERDSHIELD</h1>
+          <p class="hero-text" data-i18n="hero_text">An integrated livestock intelligence platform combining climate forecasting, research-driven insights and predictive analytics to help protect livestock livelihoods.</p>
+          <a href="forecast.html" class="btn btn-primary btn-lg" data-i18n="run_forecast">
+            <i class="fas fa-arrow-right"></i> Explore climate signals
+          </a>
+          <a href="register.html" class="btn btn-lg btn-register">
+            <i class="fas fa-user-plus"></i> Register for SMS updates
+          </a>
+        </div>
+        <div class="hero-terrain coverage-map">
+          <div class="coverage-map-heading">
+            <span>ETHIOPIA <i>·</i> CLIMATE OBSERVATION FOOTPRINT</span>
+            <strong aria-live="polite"><span id="coverageRegion">Afar</span><b id="coverageRisk">Screening…</b></strong>
+          </div>
+          <svg viewBox="0 0 500 300" role="img" aria-labelledby="coverageMapTitle coverageMapDescription">
+            <title id="coverageMapTitle">Representative climate observation locations in Ethiopia</title>
+            <desc id="coverageMapDescription">A coordinate grid with representative ERA5-Land observation points. The selected location is highlighted. This is not a livestock-density or recurrent-drought map.</desc>
+            <g class="coverage-grid" aria-hidden="true">
+              <path d="M107 24V258 M170 24V258 M233 24V258 M296 24V258 M359 24V258 M422 24V258"/>
+              <path d="M44 70H453 M44 120H453 M44 170H453 M44 220H453"/>
+              <path class="coverage-axis" d="M44 24V258H453"/>
+              <text x="107" y="278">34°E</text><text x="233" y="278">38°E</text><text x="359" y="278">42°E</text>
+              <text x="14" y="224">6°N</text><text x="14" y="174">9°N</text><text x="9" y="124">12°N</text><text x="9" y="74">15°N</text>
+            </g>
+            <g class="coverage-points" aria-hidden="true">
+              <circle data-region="Afar" data-lat="11.75" data-lon="41" cx="327.5" cy="123" r="4"/>
+              <circle data-region="Somali" data-lat="9.35" data-lon="42.8" cx="384.2" cy="163.3" r="4"/>
+              <circle data-region="Mekele" data-lat="13.4967" data-lon="39.4753" cx="279.5" cy="94.3" r="4"/>
+              <circle data-region="Borena" data-lat="4.9" data-lon="38.5" cx="248.8" cy="238.1" r="4"/>
+              <circle data-region="Gambela" data-lat="8.25" data-lon="34.6" cx="125.9" cy="181.8" r="4"/>
+              <circle data-region="Gonder" data-lat="12.6" data-lon="37.47" cx="216.6" cy="108.7" r="4"/>
+              <circle data-region="Wag-Himra" data-lat="12.9" data-lon="38.4" cx="245.6" cy="103.7" r="4"/>
+              <circle data-region="Yabello" data-lat="4.88" data-lon="38.08" cx="235.5" cy="238.4" r="4"/>
+              <circle data-region="Oromia" data-lat="8.5" data-lon="39.2" cx="270.8" cy="177.6" r="4"/>
+              <circle data-region="Amhara" data-lat="11.4" data-lon="37.9" cx="229.9" cy="129.1" r="4"/>
+              <circle data-region="SNNPR" data-lat="7" data-lon="37.9" cx="229.9" cy="202.8" r="4"/>
+              <circle data-region="Tigray" data-lat="13.5" data-lon="39.5" cx="280.3" cy="93.6" r="4"/>
+              <circle data-region="Dire Dawa" data-lat="9.6" data-lon="41.86" cx="354.6" cy="159.1" r="4"/>
+              <circle data-region="Harari" data-lat="9.3" data-lon="42.13" cx="363.1" cy="164.2" r="4"/>
+            </g>
+          </svg>
+          <div class="coverage-map-footer">
+            <span><i class="coverage-key-point"></i> Representative climate grid points</span>
+            <span>Not a livestock-density or drought-hotspot map</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="region-toolbar" aria-label="Regional observation controls">
+        <div class="region-context">
+          <span class="section-kicker">REGIONAL VIEW</span>
+          <span class="region-caption">Representative grid-point observations · Ethiopia</span>
+        </div>
+        <label class="region-select-wrap" for="regionSelector">
+          <i class="fas fa-location-dot" aria-hidden="true"></i>
+          <select id="regionSelector" class="form-input" aria-label="Select region">
+            <option value="Afar">Afar</option>
+            <option value="Somali">Somali</option>
+            <option value="Mekele">Mekele</option>
+            <option value="Borena">Borena</option>
+            <option value="Gambela">Gambela</option>
+            <option value="Gonder">Gonder</option>
+            <option value="Wag-Himra">Wag-Himra</option>
+            <option value="Yabello">Yabello</option>
+            <option value="Oromia">Oromia</option>
+            <option value="Amhara">Amhara</option>
+            <option value="SNNPR">SNNPR</option>
+            <option value="Tigray">Tigray</option>
+            <option value="Dire Dawa">Dire Dawa</option>
+            <option value="Harari">Harari</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="intelligence-overview" aria-labelledby="intelligenceTitle">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">THREE CONNECTED SYSTEMS</p>
+            <h2 id="intelligenceTitle">Intelligence overview</h2>
+          </div>
+          <p>From environmental signals to evidence and livestock decisions.</p>
+        </div>
+        <div class="intelligence-grid">
+          <article class="intelligence-card climate-layer">
+            <div class="intelligence-card-head">
+              <span class="layer-index">01</span>
+              <span class="layer-icon"><i class="fas fa-cloud-sun-rain" aria-hidden="true"></i></span>
+              <span class="layer-source">ADMAS AI</span>
+            </div>
+            <h3>Climatic Intelligence</h3>
+            <p>Observed rainfall, temperature and reference evapotranspiration with historical rainfall screening.</p>
+            <a href="forecast.html">Review climate signals <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="intelligence-card research-layer">
+            <div class="intelligence-card-head">
+              <span class="layer-index">02</span>
+              <span class="layer-icon"><i class="fas fa-book-open" aria-hidden="true"></i></span>
+              <span class="layer-source">PROB</span>
+            </div>
+            <h3>Research Intelligence</h3>
+            <p>Evidence records and candidate sources surfaced for human review; unverified research does not alter advice.</p>
+            <a href="destock.html#evidenceCard">Open evidence ledger <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="intelligence-card livestock-layer">
+            <div class="intelligence-card-head">
+              <span class="layer-index">03</span>
+              <span class="layer-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+              <span class="layer-source">HERDSHIELD</span>
+            </div>
+            <h3>Predictive Livestock Intelligence</h3>
+            <p>Market-price decision support with drought context, scenario comparisons and transparent confidence.</p>
+            <a href="destock.html">Open livestock advisor <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="risk-section" aria-labelledby="riskHeading">
+        <div class="risk-copy">
+          <p class="section-kicker">ENVIRONMENTAL MONITORING</p>
+          <h2 id="riskHeading">Rainfall risk screening</h2>
+          <p>90-day observed rainfall compared with historical analog periods for the selected representative location.</p>
+          <p class="risk-caveat" id="riskCaveat">Baseline screening only · not a validated drought diagnosis or future forecast.</p>
+        </div>
+        <div class="risk-result" id="rainRiskPanel" aria-live="polite">
+          <div class="risk-reading">
+            <span class="risk-label">BASELINE SCORE <span>(not probability)</span></span>
+            <strong id="rainRiskScore">--</strong>
+            <span class="risk-level" id="rainRiskLevel">Loading</span>
+          </div>
+          <div class="risk-meter-wrap">
+            <div class="risk-meter" role="meter" aria-label="Observed rainfall baseline screening score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="rainRiskFill"></span>
+            </div>
+            <div class="risk-meter-ends"><span>Lower signal</span><span>Higher signal</span></div>
+            <span class="risk-date" id="rainRiskDate"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="environment-section" aria-labelledby="environmentHeading">
+        <div class="section-heading environment-heading">
+          <div>
+            <p class="section-kicker">OBSERVED CONDITIONS <span class="live-indicator"></span></p>
+            <h2 id="environmentHeading">Environmental signal</h2>
+          </div>
+          <p>ERA5-Land historical reanalysis · 90-day window</p>
+        </div>
+      <div class="stats-grid">
+        <div class="card stat-card">
+          <span class="stat-mark rainfall-mark" aria-hidden="true"><i class="fas fa-cloud-rain"></i></span>
+          <p class="stat-value" id="rainfallTotal">--</p>
+          <p class="stat-label" data-i18n="observed_rainfall">Observed rainfall (90 days)</p>
+        </div>
+        <div class="card stat-card">
+          <span class="stat-mark temperature-mark" aria-hidden="true"><i class="fas fa-temperature-half"></i></span>
+          <p class="stat-value" id="meanTemperature">--</p>
+          <p class="stat-label" data-i18n="mean_temperature">Mean temperature (90 days)</p>
+        </div>
+        <div class="card stat-card">
+          <span class="stat-mark evap-mark" aria-hidden="true"><i class="fas fa-wind"></i></span>
+          <p class="stat-value" id="evapotranspirationTotal">--</p>
+          <p class="stat-label" data-i18n="reference_evapotranspiration">Reference evapotranspiration (90 days)</p>
+        </div>
+        <div class="card stat-card">
+          <span class="stat-mark records-mark" aria-hidden="true"><i class="fas fa-calendar-days"></i></span>
+          <p class="stat-value" id="observationsWindow">--</p>
+          <p class="stat-label">Daily records in this view</p>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="card chart-card rainfall-chart-card">
+            <div class="chart-heading"><div><span class="chart-index">A / 01</span><h3 class="card-title" data-i18n="rainfall">Daily rainfall</h3></div><p class="chart-subtitle" data-i18n="rainfall_subtitle">Precipitation (mm)</p></div>
+            <canvas id="rainChart" height="128"></canvas>
+        </div>
+        <div class="chart-side-stack">
+        <div class="card chart-card">
+            <div class="chart-heading"><div><span class="chart-index">A / 02</span><h3 class="card-title" data-i18n="temperature">Daily mean temperature</h3></div><p class="chart-subtitle" data-i18n="temperature_units">Degrees Celsius</p></div>
+            <canvas id="temperatureChart" height="128"></canvas>
+        </div>
+        <div class="card chart-card">
+            <div class="chart-heading"><div><span class="chart-index">A / 03</span><h3 class="card-title" data-i18n="evapotranspiration">Reference evapotranspiration</h3></div><p class="chart-subtitle" data-i18n="evapotranspiration_units">FAO reference ET₀ (mm/day)</p></div>
+            <canvas id="evapotranspirationChart" height="128"></canvas>
+        </div>
+        </div>
+      </div>
+
+      <a class="data-attribution" id="dataAttribution" data-i18n="data_loading" target="_blank" rel="noopener noreferrer">Loading observed climate data...</a>
+      <div id="errorMessage" class="error-message" role="alert" style="display: none;"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p data-i18n="footer">© 2025 Walta HerdShield | Livestock intelligence for resilient communities</p>
+    </footer>
+
+  <!-- Include your main JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/main.js"></script>
+  <!-- Include multilingual JS -->
+  <script src="js/i18n.js"></script>
+</body>
+</html>
